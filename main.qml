@@ -1,5 +1,6 @@
 import QtQuick 2.2
 import QtQuick.Controls 1.1
+import QtMultimedia 5.2
 
 ApplicationWindow {
     visible: true
@@ -15,6 +16,14 @@ ApplicationWindow {
                 onTriggered: Qt.quit();
             }
         }
+    }
+
+    Camera {
+        id: camera
+    }
+
+    VideoOutput {
+        source: camera
     }
 
     Text {
