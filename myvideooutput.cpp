@@ -30,6 +30,7 @@ void MyVideoOutput::freeResources()
 
 
 void MyVideoOutput::paint(QPainter *painter) {
+    painter->fillRect(0,0,100,200,QColor(255,0,0));
 }
 
 void MyVideoOutput::start()
