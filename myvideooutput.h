@@ -2,6 +2,7 @@
 #define MYVIDEOOUTPUT_H
 
 #include <QQuickPaintedItem>
+#include <QCamera>
 
 class MyVideoOutput : public QQuickPaintedItem
 {
@@ -10,18 +11,23 @@ class MyVideoOutput : public QQuickPaintedItem
 
 public:
     explicit MyVideoOutput(QQuickItem *parent = 0);
+    ~MyVideoOutput();
 
     QString name() const {return m_name;}
     void setName(const QString &name) {m_name = name;}
 
-    void paint(QPainter *painter) {}
+    void paint(QPainter *painter);
 
 signals:
 
 public slots:
+    void start();
 
 private:
+    void freeResources();
+
     QString m_name;
+    QCamera *m_camera;
 
 };
 

@@ -19,21 +19,23 @@ ApplicationWindow {
         }
     }
 
-    Camera {
-        id: camera
-    }
+    //Camera {
+    //    id: camera
+    //}
 
-    VideoOutput {
-        source: camera
-    }
+    //VideoOutput {
+    //    source: camera
+    //}
 
     MyVideoOutput {
         id: myVideoOutput
-        name: qsTr("kikoo")
+        Component.onCompleted: {
+            myVideoOutput.start();
+        }
     }
 
     Text {
-        text: myVideoOutput.name
+        text: qsTr("kikoo")
         anchors.centerIn: parent
     }
 }
