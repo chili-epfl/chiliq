@@ -2,7 +2,11 @@ TEMPLATE = app
 
 QT += qml quick widgets multimedia
 
-SOURCES += main.cpp
+HEADERS += \
+    myvideooutput.h
+
+SOURCES += main.cpp \
+    myvideooutput.cpp
 
 RESOURCES += qml.qrc
 

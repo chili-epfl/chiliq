@@ -1,6 +1,7 @@
 import QtQuick 2.2
 import QtQuick.Controls 1.1
 import QtMultimedia 5.2
+import MyVideoOutput 1.0
 
 ApplicationWindow {
     visible: true
@@ -26,8 +27,13 @@ ApplicationWindow {
         source: camera
     }
 
+    MyVideoOutput {
+        id: myVideoOutput
+        name: qsTr("kikoo")
+    }
+
     Text {
-        text: qsTr("Hello World")
+        text: myVideoOutput.name
         anchors.centerIn: parent
     }
 }
