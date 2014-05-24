@@ -31,8 +31,8 @@ ApplicationWindow {
         id: myVideoOutput
         x: 10
         y: 20
-        width: 100
-        height: 200
+        width: 1600
+        height: 1200
         Component.onCompleted: {
             myVideoOutput.start();
         }

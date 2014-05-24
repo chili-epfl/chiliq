@@ -3,10 +3,15 @@ TEMPLATE = app
 QT += qml quick widgets multimedia
 
 HEADERS += \
-    myvideooutput.h
+    myvideooutput.h \
+    myvideosurface.h \
+    yuv2rgb.h \
+    frameobserver.h
 
 SOURCES += main.cpp \
-    myvideooutput.cpp
+    myvideooutput.cpp \
+    myvideosurface.cpp \
+    yuv2rgb.cpp
 
 RESOURCES += qml.qrc
 
