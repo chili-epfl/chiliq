@@ -45,7 +45,7 @@ private:
     QRect m_imageRect;
     QSize m_frameSize;
 
-    Yuv2Rgb m_yuv2Rgb;
+    //Yuv2Rgb m_yuv2Rgb;
 
 };
 

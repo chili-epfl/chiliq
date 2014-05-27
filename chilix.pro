@@ -27,7 +27,7 @@ INCLUDEPATH = libs/include
 
 unix:!android:LIBS += -L$$PWD/libs/linux64
 
-LIBS += -lopencv_core
+LIBS += -lopencv_core -lopencv_imgproc
 LIBS += -lchilitags
 
 OTHER_FILES += \

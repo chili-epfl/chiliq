@@ -4,6 +4,9 @@
 #include <QVideoRendererControl>
 #include <myvideosurface.h>
 
+#include <opencv2/core/core.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
+
 #include <iostream>
 
 MyVideoOutput::MyVideoOutput(QQuickItem *parent)
@@ -41,15 +44,21 @@ bool MyVideoOutput::updateItem(const QVideoFrame &frame)
 {
     m_frame = frame;
 
+    qDebug("pixelFormat:%d", m_frame.pixelFormat());
 
     if (m_frame.map(QAbstractVideoBuffer::ReadOnly)) {
         if (m_frame.pixelFormat() == QVideoFrame::Format_UYVY) {
-            m_yuv2Rgb.convert(m_frame.bits(), m_frame.width(), m_frame.height());
-            std::cout << m_yuv2Rgb.width() << std::endl;
 
-            m_targetImage = QImage(m_yuv2Rgb.bits(), m_yuv2Rgb.width(),
-                                   m_yuv2Rgb.height(), m_yuv2Rgb.width() * 4,
-                                   QImage::Format_RGB32);
+            std::cout << m_frame.bytesPerLine() << std::endl;
+            cv::Mat yuv(m_frame.height(), m_frame.width(), CV_8UC2, m_frame.bits());
+            cv::Mat rgb(m_frame.height(), m_frame.width(), CV_8UC4);
+            std::cout << yuv.channels() << std::endl;
+            std::cout << rgb.channels() << std::endl;
+            cv::cvtColor(yuv, rgb, CV_YUV2RGBA_UYVY);
+            //m_yuv2Rgb.convert(m_frame.bits(), m_frame.width(), m_frame.height());
+
+            m_targetImage = QImage(rgb.data, rgb.cols,
+                                   rgb.rows, QImage::Format_RGB32);
         } else if (m_frame.pixelFormat() == QVideoFrame::Format_RGB32) {
             m_targetImage = QImage(m_frame.bits(), m_frame.width(),
                                    m_frame.height(), m_frame.bytesPerLine(),
