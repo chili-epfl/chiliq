@@ -21,6 +21,26 @@ public:
     QString name() const {return m_name;}
     void setName(const QString &name) {m_name = name;}
 
+    Q_INVOKABLE QStringList tagIds() const {
+        QStringList tagIds;
+        for (auto tag : m_tags) {
+            tagIds.append(QString::fromStdString(tag.first));
+        }
+        return tagIds;
+    }
+
+    Q_INVOKABLE bool isPresent(QString id) const {
+        return m_tags.find(id.toStdString()) != m_tags.end();
+    }
+
+    Q_INVOKABLE QMatrix4x4 transform(QString id) const {
+        auto it = m_tags.find(id.toStdString());
+        if (it == m_tags.end()) return QMatrix4x4();
+        float values[16];
+        for (int i = 0; i<16; ++i) values[i] = it->second.val[i];
+        return QMatrix4x4(values);
+    }
+
     QSize frameSize() const {return m_frameSize;}
 
     void paint(QPainter *painter);
@@ -29,6 +49,7 @@ public:
 
 signals:
     void frameSizeChanged();
+    void inputUpdate();
 
 public slots:
     void start();
@@ -42,7 +63,8 @@ private:
     MyVideoSurface *m_myVideoSurface;
 
     cv::Mat m_gray, m_rgb;
-    chilitags::Chilitags m_chilitags;
+    chilitags::Chilitags3D m_chilitags;
+    std::map<std::string, cv::Matx44d> m_tags;
 
     QVideoFrame m_frame;
     QImage m_targetImage;

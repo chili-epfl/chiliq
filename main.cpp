@@ -7,7 +7,8 @@ int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
 
-    qmlRegisterType<ChilitagsCamera>("ChilitagsCamera", 1, 0, "ChilitagsCamera");
+    qmlRegisterType<ChilitagsCamera>("Chilitags", 1, 0, "ChilitagsCamera");
+
 
     QQmlApplicationEngine engine;
     engine.load(QUrl(QStringLiteral("qrc:///main.qml")));

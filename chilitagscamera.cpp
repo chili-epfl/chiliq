@@ -69,8 +69,8 @@ bool ChilitagsCamera::updateItem(const QVideoFrame &frame)
 
         m_imageRect = m_targetImage.rect();
 
-        auto tags = m_chilitags.find(m_gray);
-        qDebug("tags: %d", tags.size());
+        m_tags = m_chilitags.estimate(m_gray);
+        emit inputUpdate();
 
         m_frame.unmap();
     }

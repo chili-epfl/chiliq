@@ -1,7 +1,7 @@
 import QtQuick 2.2
 import QtQuick.Controls 1.1
 import QtMultimedia 5.2
-import ChilitagsCamera 1.0
+import Chilitags 1.0
 
 ApplicationWindow {
     visible: true
@@ -27,6 +27,10 @@ ApplicationWindow {
         height: 1200
         Component.onCompleted: {
             chilitagsCamera.start();
+        }
+        onInputUpdate: {
+            if (isPresent("tag_64")) console.log("64:" + transform("tag_64"));
+            console.log(tagIds());
         }
     }
 
