@@ -5,11 +5,13 @@ QT += qml quick widgets multimedia
 HEADERS += \
     myvideosurface.h \
     frameobserver.h \
-    chilitagscamera.h
+    chilitagscamera.h \
+    configfinder.h
 
 SOURCES += main.cpp \
     myvideosurface.cpp \
-    chilitagscamera.cpp
+    chilitagscamera.cpp \
+    configfinder.cpp
 
 RESOURCES += qml.qrc
 

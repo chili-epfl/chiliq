@@ -71,6 +71,7 @@ bool ChilitagsCamera::updateItem(const QVideoFrame &frame)
 
         m_tags = m_chilitags.estimate(m_gray);
         emit inputUpdate();
+        emit tagsChanged(tags());
 
         m_frame.unmap();
     }

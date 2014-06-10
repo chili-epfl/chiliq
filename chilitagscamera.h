@@ -7,12 +7,14 @@ class MyVideoSurface;
 #include "frameobserver.h"
 
 #include <chilitags/chilitags.hpp>
+#include <QMatrix4x4>
 
 class ChilitagsCamera : public QQuickPaintedItem, public FrameObserver
 {
     Q_OBJECT
     Q_PROPERTY(QString name READ name WRITE setName)
     Q_PROPERTY(QSize frameSize READ frameSize NOTIFY frameSizeChanged)
+    Q_PROPERTY(QVariantMap tags READ tags NOTIFY tagsChanged)
 
 public:
     explicit ChilitagsCamera(QQuickItem *parent = 0);
@@ -47,9 +49,19 @@ public:
 
     virtual bool updateItem(const QVideoFrame &frame);
 
+    QVariantMap tags() const {
+        QVariantMap tags;
+        for (auto tag : m_tags) {
+            QString id = QString::fromStdString(tag.first);
+            tags.insert(id, transform(id));
+        }
+        return tags;
+    }
+
 signals:
     void frameSizeChanged();
     void inputUpdate();
+    void tagsChanged(QVariantMap tags);
 
 public slots:
     void start();

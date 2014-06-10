@@ -28,14 +28,16 @@ ApplicationWindow {
         Component.onCompleted: {
             chilitagsCamera.start();
         }
-        onInputUpdate: {
-            if (isPresent("tag_64")) console.log("64:" + transform("tag_64"));
-            console.log(tagIds());
-        }
+    }
+
+    ConfigFinder {
+        id: configFinder
+        tags: chilitagsCamera.tags
     }
 
     Text {
-        text: qsTr("kikoo")
+        //text: qsTr(configFinder.config.toString())
+        text: qsTr("kikoo");
         anchors.centerIn: parent
     }
 }
