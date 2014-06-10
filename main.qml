@@ -19,14 +19,6 @@ ApplicationWindow {
         }
     }
 
-    //Camera {
-    //    id: camera
-    //}
-
-    //VideoOutput {
-    //    source: camera
-    //}
-
     MyVideoOutput {
         id: myVideoOutput
         x: 10

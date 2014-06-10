@@ -21,10 +21,6 @@ include(deployment.pri)
 
 QMAKE_CXXFLAGS += -std=c++11
 
-INCLUDEPATH = libs/include
-
-unix:!android:LIBS += -L$$PWD/libs/linux64
-
 LIBS += -lopencv_core -lopencv_imgproc
 LIBS += -lchilitags
 

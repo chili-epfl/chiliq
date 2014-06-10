@@ -6,6 +6,8 @@
 class MyVideoSurface;
 #include "frameobserver.h"
 
+#include <chilitags/chilitags.hpp>
+
 class MyVideoOutput : public QQuickPaintedItem, public FrameObserver
 {
     Q_OBJECT
@@ -38,6 +40,9 @@ private:
 
     QCamera *m_camera;
     MyVideoSurface *m_myVideoSurface;
+
+    cv::Mat m_gray, m_rgb;
+    chilitags::Chilitags m_chilitags;
 
     QVideoFrame m_frame;
     QImage m_targetImage;

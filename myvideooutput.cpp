@@ -13,6 +13,7 @@ MyVideoOutput::MyVideoOutput(QQuickItem *parent)
   :  QQuickPaintedItem(parent)
   , m_camera(0)
   , m_myVideoSurface(0)
+  , m_chilitags()
 {
 }
 
@@ -44,21 +45,17 @@ bool MyVideoOutput::updateItem(const QVideoFrame &frame)
 {
     m_frame = frame;
 
-    qDebug("pixelFormat:%d", m_frame.pixelFormat());
-
+    m_gray.create(m_frame.height(), m_frame.width(), CV_8UC1);
     if (m_frame.map(QAbstractVideoBuffer::ReadOnly)) {
         if (m_frame.pixelFormat() == QVideoFrame::Format_UYVY) {
 
-            std::cout << m_frame.bytesPerLine() << std::endl;
             cv::Mat yuv(m_frame.height(), m_frame.width(), CV_8UC2, m_frame.bits());
-            cv::Mat rgb(m_frame.height(), m_frame.width(), CV_8UC4);
-            std::cout << yuv.channels() << std::endl;
-            std::cout << rgb.channels() << std::endl;
-            cv::cvtColor(yuv, rgb, CV_YUV2RGBA_UYVY);
-            //m_yuv2Rgb.convert(m_frame.bits(), m_frame.width(), m_frame.height());
+            m_rgb.create(m_frame.height(), m_frame.width(), CV_8UC4);
+            cv::cvtColor(yuv, m_rgb, CV_YUV2RGBA_UYVY);
+            cv::cvtColor(yuv, m_gray, CV_YUV2GRAY_UYVY);
 
-            m_targetImage = QImage(rgb.data, rgb.cols,
-                                   rgb.rows, QImage::Format_RGB32);
+            m_targetImage = QImage(m_rgb.data, m_rgb.cols,
+                                   m_rgb.rows, QImage::Format_RGB32);
         } else if (m_frame.pixelFormat() == QVideoFrame::Format_RGB32) {
             m_targetImage = QImage(m_frame.bits(), m_frame.width(),
                                    m_frame.height(), m_frame.bytesPerLine(),
@@ -72,7 +69,8 @@ bool MyVideoOutput::updateItem(const QVideoFrame &frame)
 
         m_imageRect = m_targetImage.rect();
 
-        // TODO use image
+        auto tags = m_chilitags.find(m_gray);
+        qDebug("tags: %d", tags.size());
 
         m_frame.unmap();
     }
