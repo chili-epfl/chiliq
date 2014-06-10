@@ -5,7 +5,6 @@
 #include <QCamera>
 class MyVideoSurface;
 #include "frameobserver.h"
-#include "yuv2rgb.h"
 
 class MyVideoOutput : public QQuickPaintedItem, public FrameObserver
 {
@@ -44,9 +43,6 @@ private:
     QImage m_targetImage;
     QRect m_imageRect;
     QSize m_frameSize;
-
-    //Yuv2Rgb m_yuv2Rgb;
-
 };
 
 #endif // MYVIDEOOUTPUT_H
