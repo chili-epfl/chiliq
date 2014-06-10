@@ -8,15 +8,15 @@ class MyVideoSurface;
 
 #include <chilitags/chilitags.hpp>
 
-class MyVideoOutput : public QQuickPaintedItem, public FrameObserver
+class ChilitagsCamera : public QQuickPaintedItem, public FrameObserver
 {
     Q_OBJECT
     Q_PROPERTY(QString name READ name WRITE setName)
     Q_PROPERTY(QSize frameSize READ frameSize NOTIFY frameSizeChanged)
 
 public:
-    explicit MyVideoOutput(QQuickItem *parent = 0);
-    ~MyVideoOutput();
+    explicit ChilitagsCamera(QQuickItem *parent = 0);
+    ~ChilitagsCamera();
 
     QString name() const {return m_name;}
     void setName(const QString &name) {m_name = name;}

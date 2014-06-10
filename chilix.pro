@@ -3,13 +3,13 @@ TEMPLATE = app
 QT += qml quick widgets multimedia
 
 HEADERS += \
-    myvideooutput.h \
     myvideosurface.h \
-    frameobserver.h
+    frameobserver.h \
+    chilitagscamera.h
 
 SOURCES += main.cpp \
-    myvideooutput.cpp \
-    myvideosurface.cpp
+    myvideosurface.cpp \
+    chilitagscamera.cpp
 
 RESOURCES += qml.qrc
 

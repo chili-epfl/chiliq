@@ -1,4 +1,4 @@
-#include "myvideooutput.h"
+#include "chilitagscamera.h"
 
 #include <QPainter>
 #include <QVideoRendererControl>
@@ -9,7 +9,7 @@
 
 #include <iostream>
 
-MyVideoOutput::MyVideoOutput(QQuickItem *parent)
+ChilitagsCamera::ChilitagsCamera(QQuickItem *parent)
   :  QQuickPaintedItem(parent)
   , m_camera(0)
   , m_myVideoSurface(0)
@@ -17,12 +17,12 @@ MyVideoOutput::MyVideoOutput(QQuickItem *parent)
 {
 }
 
-MyVideoOutput::~MyVideoOutput()
+ChilitagsCamera::~ChilitagsCamera()
 {
     freeResources();
 }
 
-void MyVideoOutput::freeResources()
+void ChilitagsCamera::freeResources()
 {
     if (m_myVideoSurface)
         m_myVideoSurface->stop();
@@ -35,13 +35,13 @@ void MyVideoOutput::freeResources()
 }
 
 
-void MyVideoOutput::paint(QPainter *painter) {
+void ChilitagsCamera::paint(QPainter *painter) {
     painter->fillRect(0,0,100,200,QColor(255,0,0));
     m_imageRect.moveCenter(boundingRect().center().toPoint());
     painter->drawImage(m_imageRect.topLeft(), m_targetImage);
 }
 
-bool MyVideoOutput::updateItem(const QVideoFrame &frame)
+bool ChilitagsCamera::updateItem(const QVideoFrame &frame)
 {
     m_frame = frame;
 
@@ -78,7 +78,7 @@ bool MyVideoOutput::updateItem(const QVideoFrame &frame)
     return true;
 }
 
-void MyVideoOutput::start()
+void ChilitagsCamera::start()
 {
     freeResources();
 

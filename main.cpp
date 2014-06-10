@@ -1,13 +1,13 @@
 #include <QApplication>
 #include <QQmlApplicationEngine>
 
-#include "myvideooutput.h"
+#include "chilitagscamera.h"
 
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
 
-    qmlRegisterType<MyVideoOutput>("MyVideoOutput", 1, 0, "MyVideoOutput");
+    qmlRegisterType<ChilitagsCamera>("ChilitagsCamera", 1, 0, "ChilitagsCamera");
 
     QQmlApplicationEngine engine;
     engine.load(QUrl(QStringLiteral("qrc:///main.qml")));
